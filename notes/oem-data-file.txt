@@ -1,0 +1,162 @@
+General Settings:
+  Boot Screen: 0x5000 1x UInt8
+    - 0x00: Preset Logo (Default)
+    - 0x01: Preset Msg
+    - 0x02: Voltage
+
+  Boot Screen 1: 0x5010 10x UInt8 ASCII
+    Default: WELCOME
+
+  Boot Screen 2: 0x5020 10x UInt8 ASCII
+    Default: Radioddity
+
+  Time Out: 0x5040 1x UInt8
+    - 0x00: Off
+    - 0x01: 15 seconds (Min)
+    - 0xNN: UInt8(NN) * 15 seconds
+    - 0x07: 105 seconds (Default)
+    - 0x28: 600 seconds (Max)
+
+  Squelch Level: 0x5041 1x UInt8
+    - 0x00: 0
+    - 0x03: 3 (Default)
+    - 0x09: 9 (Max)
+
+  Voice Alert: 0x5043 1x UInt8
+    - 0x27: On (Default)
+    - 0x26: Off
+
+  Auto Key Lock: 0x5045 1x UInt8
+    - 0x94: Off (Default)
+    - 0xD4: On
+
+  Alarm Sound: 0x5046 1x UInt8
+    - 0x26: On (Default)
+    - 0x22: Off
+
+  Alarm Mode: 0x5046 1x UInt8
+    - 0x26: On Site (Default)
+    - 0x2E: Send Sound
+    - 0x36: Send Code
+
+  Repeat Tail Revert: 0x5047 1x UInt8
+    - 0x00: Off
+    - 0x01: 100 ms
+    - 0x02: 200 ms (Default)
+    - 0x0N: N * 100 ms
+    - 0x0A: 1000 ms (Max)
+
+  Repeat Tail Delay: 0x5048 1x UInt8
+    - 0x00: Off
+    - 0x01: 100 ms
+    - 0x02: 200 ms (Default)
+    - 0x0N: N * 100 ms
+    - 0x0A: 1000 ms (Max)
+
+  TBST: 0x5049 1x UInt8
+    - 0x00: 1000 Hz
+    - 0x01: 1450 Hz
+    - 0x02: 1750 Hz (Default)
+    - 0x03: 2100 Hz
+
+  VOX Level: 0x5042 1x UInt8
+    - 0x00: Off (Default)
+    - 0x01: 1 (Min)
+    - 0x09: 9 (Max)
+
+  Work Mode: 0x5043 1x UInt8
+    - 0x27: CH Mode (Default)
+    - 0x23: Freq Mode
+
+  Battery Save Mode: 0x5043 1x UInt8
+    - 0x07: None
+    - 0x17: 1:1
+    - 0x27: 1:2 (Default)
+    - 0x37: 1:3
+    - 0x47: 1:4
+
+  Backlight: 0x5044 1x UInt8
+    - 0x00: Bright (No Timeout)
+    - 0x01: 1s Timeout
+    - 0x0N: N * 1s Timeout
+    - 0x05: 5s Timeout (Default)
+    - 0x0A: 10s Timeout
+
+  DTMF Side Tone: 0x5045 1x UInt8
+    - 0x94: Off (Default)
+    - 0x95: DT-ST
+    - 0x96: ANI-ST
+    - 0x97: DT+ANI
+
+  Scan Type: 0x5045 1x UInt8
+    - 0x90: Time
+    - 0x94: Carrier (Default)
+    - 0x98: Search
+
+  CTCSS Tail Revert: 0x5045 1x UInt8
+    - 0x84: Off
+    - 0x94: On (Default)
+
+  Beep Tone: 0x5045 1x UInt8
+    - 0x94: On (Default)
+    - 0x14: Off
+
+  FM Radio Enabled: 0x5046 1x UInt8
+    - 0x26: On (Default)
+    - 0x24: Off
+
+  Roger: 0x5046 1x UInt8
+    - 0x26: On (Default)
+    - 0x06: Off
+
+  Dual Standby: 0x5046 1x UInt8
+    - 0x66: On
+    - 0x26: Off (Default)
+
+  A Ch Display Type: 0x5050 1x UInt8
+    - 0x00: Name + Number (Default)
+    - 0x01: Freq + Number
+
+  B Ch Display Type: 0x5050 1x UInt8
+    - 0x00: Name + Number (Default)
+    - 0x02: Freq + Number
+
+Phone System:
+  DTMF Encode System: 0x6000 - 0x604A
+    0xFF: Not Set (Default)
+    0x00: 0
+    0x09: 9
+    0x0A: A
+    0x0D: D
+    5x UInt8 per code, 0xFF right padded
+    Code 1 offset 0x00 (last digit 0x6004)
+    Code 15 offset 0x46 (last digit 0x604A)
+
+  Radio ID Code: 0x6050 5x UInt8 ASCII [0-9A-D]
+    Default: 12345
+
+  PTT Press Send: 0x6060 1x UInt8
+    - 0x00: No (Default)
+    - 0x01: Yes
+
+  PTT Release Send: 0x6060 1x UInt8
+    - 0x00: No (Default)
+    - 0x02: Yes
+
+  Delay Time: 0x6061 1x UInt8
+    - 0x00: 100 ms (Default)
+    - 0x01: 150 ms
+    - 0xNN: 100 + (UInt8(NN) * 50) ms
+    - 0x12: 1000 ms (Max)
+
+  Digit Duration: 0x6062 1x UInt8
+    - 0x00: 80 ms (Default)
+    - 0x01: 90 ms
+    - 0xNN: 80 + (UInt8(NN) * 10) ms
+    - 0xC0: 2000 ms (Max)
+
+  Digit Interval Duration: 0x6063 1x UInt8
+    - 0x00: 80 ms (Default)
+    - 0x01: 90 ms
+    - 0xNN: 80 + (UInt8(NN) * 10) ms
+    - 0xC0: 2000 ms (Max)

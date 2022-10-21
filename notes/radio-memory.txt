@@ -1,0 +1,199 @@
+General Settings:
+  Radio Read: 0xB000, 0xFC0
+  Radio Write: 0x4000, 0xFC0
+  Data File: 0x5000, 0xFC0
+  Default Padding: 0x00
+
+  0x00: Boot Screen Mode (1x UInt8)
+    - 0x00: Preset Logo (Default)
+    - 0x01: Preset Msg
+    - 0x02: Voltage
+
+  0x10 - 0x19: Boot Screen 1 (10x UInt8 ASCII)
+    Default: WELCOME
+
+  0x20 - 0x29: Boot Screen 2 (10x UInt8 ASCII)
+    Default: Radioddity
+
+  0x30 - 0x3F: Unknown
+    0000 0040 0000 0052 0000 6013 0000 4017
+
+  0x40: Time Out Transmit (1x UInt8)
+    - 0x00: Off
+    - 0x01: 15 seconds (Min)
+    - 0xNN: UInt8(NN) * 15 seconds
+    - 0x07: 105 seconds (Default)
+    - 0x28: 600 seconds (Max)
+
+  0x41: Squelch Level (1x UInt8)
+    - 0x00: 0
+    - 0x03: 3 (Default)
+    - 0x09: 9 (Max)
+
+  0x42: VOX Level (1x UInt8)
+    - 0x00: Off (Default)
+    - 0x01: 1 (Min)
+    - 0x09: 9 (Max)
+
+  0x43: Flags (1x UInt8)
+    0b BBBB 0 W 1 V
+
+    BBBB: Battery Saver
+      0x0: Off
+      0x1: 1:1
+      0x2: 1:2 (Default)
+      0x3: 1:3
+      0x4: 1:4
+
+    W: Work Mode
+    - 0: Freq Mode
+    - 1: CH Mode (Default)
+
+    V: Voice Alert
+    - 1: On (Default)
+    - 0: Off    
+
+  0x44: Backlight (1x UInt8)
+    - 0x00: Bright (No Timeout)
+    - 0x01: 1s Timeout
+    - 0x0N: N * 1s Timeout
+    - 0x05: 5s Timeout (Default)
+    - 0x0A: 10s Timeout
+
+  0x45: Flags (1x UInt8)
+    0b B A 0 C SS DD
+
+    B: Beep Tone
+    - 0: Off
+    - 1: On (Default)
+
+    A: Auto Key Lock
+    - 0: Off (Default)
+    - 1: On
+
+    C: CTCSS Tail Rever
+    - 0: Off
+    - 1: On (Default)
+
+    SS: Scan Type
+    - 00: Time
+    - 01: Carrier (Default)
+    - 10: Search
+
+    DD: DTMF Side Tone
+    - 00: Off (Default)
+    - 01: DT-ST
+    - 10: ANI-ST
+    - 11: DT+ANI
+
+  0x46: Flags (1x UInt8)
+    0b 0 D R MM A F 0
+
+    D: Dual Standby
+    - 0: Off (Default)
+    - 1: On
+
+    R: Roger Beep
+    - 0: Off
+    - 1: On (Default)
+
+    MM: Alarm Mode
+    - 00: On Site (Default)
+    - 01: Send Sound
+    - 10: Send Code
+
+    A: Alarm Sound
+    - 0: Off
+    - 1: On (Default)
+
+    F: FM Radio
+    - 0: Disabled
+    - 1: Enabled (Default)
+
+  0x47: Repeat Tail Revert (1x UInt8)
+    - 0x00: Off
+    - 0x01: 100 ms
+    - 0x02: 200 ms (Default)
+    - 0x0N: N * 100 ms
+    - 0x0A: 1000 ms (Max)
+
+  0x48: Repeat Tail Delay (1x UInt8)
+    - 0x00: Off
+    - 0x01: 100 ms
+    - 0x02: 200 ms (Default)
+    - 0x0N: N * 100 ms
+    - 0x0A: 1000 ms (Max)
+
+  0x49: TBST (1x UInt8)
+    - 0x00: 1000 Hz
+    - 0x01: 1450 Hz
+    - 0x02: 1750 Hz (Default)
+    - 0x03: 2100 Hz
+
+  0x50: Channel Display Type Flags (1x UInt8)
+    0b 000000 BA
+    
+    B: Channel B
+    - 0: Name + Number (Default)
+    - 1: Freq + Number
+
+    A: Channel A
+    - 0: Name + Number (Default)
+    - 1: Freq + Number
+
+  0x61 - 0x68: 0xFF (?)
+  0x6B - 0x6F: 0xFF (?)
+  0x70 - 0x79: 0xFF (?)
+
+DTMF Settings:
+  Radio Read: 0xD000, 0xFC0
+  Radio Write: 0xD000, 0xFC0
+  Data File: 0x6000, 0xFC0
+  Default Padding: 0x00
+
+  0x00 - 0x4A: DTMF Codes
+    5x UInt8 per code, 0xFF right padded
+    Code 1 offset 0x00 (last digit 0x04)
+    Code 15 offset 0x46 (last digit 0x4A)
+    0xFF: Not Set (Default)
+    0x00: 0
+    0x09: 9
+    0x0A: A
+    0x0D: D
+
+  0x50 - 0x55: Radio ID Code (5x UInt8 ASCII)
+    All digits must be filled in.
+    Default: 12345
+    0x00: 0
+    0x09: 9
+    0x0A: A
+    0x0D: D
+
+  0x60: PTT Flags (1x UInt8)
+    0b 000000 R S
+    
+    R: PTT Release Send
+    - 0: No (Default)
+    - 1: Yes
+
+    S: PTT Press Send
+      - 0: No (Default)
+      - 1: Yes
+
+  0x61: Delay Time (1x UInt8)
+    - 0x00: 100 ms (Default)
+    - 0x01: 150 ms
+    - 0xNN: 100 + (UInt8(NN) * 50) ms
+    - 0x12: 1000 ms (Max)
+
+  0x62: Digit Duration (1x UInt8)
+    - 0x00: 80 ms (Default)
+    - 0x01: 90 ms
+    - 0xNN: 80 + (UInt8(NN) * 10) ms
+    - 0xC0: 2000 ms (Max)
+
+  0x63: Digit Interval Duration (1x UInt8)
+    - 0x00: 80 ms (Default)
+    - 0x01: 90 ms
+    - 0xNN: 80 + (UInt8(NN) * 10) ms
+    - 0xC0: 2000 ms (Max)

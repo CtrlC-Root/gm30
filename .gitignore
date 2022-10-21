@@ -1,0 +1,8 @@
+# Python
+__pycache__
+*.egg-info
+
+# test_read.sh script output
+/hashes.txt
+/output.txt
+/*.bin
